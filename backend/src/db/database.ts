@@ -9,7 +9,7 @@ const dialect = new PostgresDialect({
     host: "localhost",
     database: "biblioteka",
     user: "postgres",
-    password: "twoje_haslo",
+    password: "1234",
     port: 5432,
     max: 10, // Maksymalna liczba połączeń
   }),

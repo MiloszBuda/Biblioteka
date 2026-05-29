@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
     const books = await bookService.getAllBooks();
     res.json(books);
   } catch (error) {
+    console.error("PRAWDZIWY BŁĄD:", error);
     res
       .status(500)
       .json({ message: "Wystąpił błąd podczas pobierania książek" });

@@ -1,0 +1,300 @@
+{
+  "info": {
+    "name": "Biblioteka Miniprojekt API",
+    "description": "Kolekcja zapytań CRUD dla miniprojektu biblioteki (Node.js + Express + TypeScript + Kysely).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Members (Czytelnicy)",
+      "item": [
+        {
+          "name": "Pobierz wszystkich aktywnych czytelników",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/members",
+              "host": ["{{baseUrl}}"],
+              "path": ["members"]
+            }
+          }
+        },
+        {
+          "name": "Dodaj nowego czytelnika",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jan\",\n  \"lastName\": \"Kowalski\",\n  \"address\": \"ul. Długa 5, 30-001 Kraków\",\n  \"cardNumber\": \"KARTA_001\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/members",
+              "host": ["{{baseUrl}}"],
+              "path": ["members"]
+            }
+          }
+        },
+        {
+          "name": "Edytuj czytelnika (Częściowy Update)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"ul. Krótka 10, 31-002 Kraków\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/members/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["members", "1"]
+            }
+          }
+        },
+        {
+          "name": "Zdezaktywuj czytelnika (Soft Delete)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/members/1/deactivate",
+              "host": ["{{baseUrl}}"],
+              "path": ["members", "1", "deactivate"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Books (Książki)",
+      "item": [
+        {
+          "name": "Pobierz wszystkie książki",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/books",
+              "host": ["{{baseUrl}}"],
+              "path": ["books"]
+            }
+          }
+        },
+        {
+          "name": "Pobierz dostępne książki",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/books/available",
+              "host": ["{{baseUrl}}"],
+              "path": ["books", "available"]
+            }
+          }
+        },
+        {
+          "name": "Dodaj nową książkę",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Wiedźmin: Ostatnie Życzenie\",\n  \"author\": \"Andrzej Sapkowski\",\n  \"totalCopies\": 3\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/books",
+              "host": ["{{baseUrl}}"],
+              "path": ["books"]
+            }
+          }
+        },
+        {
+          "name": "Edytuj detale książki",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Wiedźmin: Krew Elfów\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/books/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["books", "1"]
+            }
+          }
+        },
+        {
+          "name": "Zaktualizuj stan magazynowy",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newTotal\": 5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/books/1/copies",
+              "host": ["{{baseUrl}}"],
+              "path": ["books", "1", "copies"]
+            }
+          }
+        },
+        {
+          "name": "Wycofaj książkę (Soft Delete)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/books/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["books", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Borrowings (Wypożyczenia - Transakcje)",
+      "item": [
+        {
+          "name": "Wypożycz książkę",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberId\": 1,\n  \"bookId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/borrowings",
+              "host": ["{{baseUrl}}"],
+              "path": ["borrowings"]
+            }
+          }
+        },
+        {
+          "name": "Oddaj książkę",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/borrowings/return/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["borrowings", "return", "1"]
+            }
+          }
+        },
+        {
+          "name": "Pobierz aktywne wypożyczenia czytelnika",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/borrowings/active/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["borrowings", "active", "1"]
+            }
+          }
+        },
+        {
+          "name": "Pobierz wszystkie wypożyczenia",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/borrowings",
+              "host": ["{{baseUrl}}"],
+              "path": ["borrowings"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Reports (Raporty z JOIN i GROUP BY)",
+      "item": [
+        {
+          "name": "Najpopularniejsze książki (z limitem)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reports/most-borrowed?limit=3",
+              "host": ["{{baseUrl}}"],
+              "path": ["reports", "most-borrowed"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Raport dłużników (Przetrzymane książki)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reports/overdue",
+              "host": ["{{baseUrl}}"],
+              "path": ["reports", "overdue"]
+            }
+          }
+        },
+        {
+          "name": "Historia wypożyczeń czytelnika",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reports/member-history/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["reports", "member-history", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    }
+  ]
+}
