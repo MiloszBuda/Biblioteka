@@ -1,5 +1,6 @@
 import express from "express";
 import "dotenv/config";
+import cors from "cors";
 
 import bookRoutes from "./routes/bookRoutes";
 import memberRoutes from "./routes/memberRoutes";
@@ -8,6 +9,7 @@ import reportRoutes from "./routes/reportRoutes";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/books", bookRoutes);
