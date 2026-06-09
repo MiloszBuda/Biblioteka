@@ -1,0 +1,11 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-hover tbody tr:hover {
+  cursor: pointer;
+}
+
+body {
+  margin-bottom: 100px;
+}

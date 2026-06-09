@@ -1,5 +1,3 @@
-// getAll +, getAvailable +, addBook +, updateBook +, updateCopies +, deleteBook (soft delete by setting withdrawn flag, validate no active borrowings)
-
 import { db } from "../db/database";
 import { UpdateBookData } from "../db/types";
 

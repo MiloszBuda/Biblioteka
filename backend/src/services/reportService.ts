@@ -1,5 +1,3 @@
-// getOverdueBorrowings, getMostBorrowedBooks, getBorrowingHistoryForMember
-
 import { db } from "../db/database";
 
 export async function getOverdueBorrowings() {
@@ -48,6 +46,7 @@ export async function getBorrowingHistoryForMember(memberId: number) {
       "borrowings.borrow_date",
       "borrowings.due_date",
       "borrowings.return_date",
+      "borrowings.id",
     ])
     .where("borrowings.member_id", "=", memberId)
     .where("borrowings.return_date", "is not", null) // tylko zwrócone wypożyczenia, bo aktywne są w getActiveBorrowingsByMember (borrowingService.ts)

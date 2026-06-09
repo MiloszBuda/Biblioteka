@@ -1,13 +1,15 @@
-// borrowBook +, returnBook (update with transaction, lock row, validate, update book availability, set return_date) +,
-// getAllBorrowings (whole history) +, getActiveBorrowingsByMember (not returned) +
-
 import { db } from "../db/database";
 
 export async function getActiveBorrowingsByMember(memberId: number) {
   const result = await db
     .selectFrom("borrowings")
     .innerJoin("books", "books.id", "borrowings.book_id")
-    .select(["books.title", "borrowings.borrow_date", "borrowings.due_date"])
+    .select([
+      "books.title",
+      "borrowings.borrow_date",
+      "borrowings.due_date",
+      "borrowings.id",
+    ])
     .where("borrowings.member_id", "=", memberId)
     .where("borrowings.return_date", "is", null)
     .execute();

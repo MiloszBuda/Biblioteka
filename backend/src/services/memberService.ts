@@ -1,5 +1,3 @@
-// getAllActive +, createNew +, updateMemberDetails +, deactivateMember (soft delete by setting is_active flag, validate no active borrowings)
-
 import { db } from "../db/database";
 import { MemberUpdateData } from "../db/types";
 
