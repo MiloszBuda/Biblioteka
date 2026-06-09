@@ -21,13 +21,13 @@ app.use((req, res) => {
   res.status(404).json({ message: "Nie znaleziono podanego zasobu API." });
 });
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Serwer biblioteki działa poprawnie!`);
-  console.log(
-    `Baza testowa dostępna pod adresem: http://localhost:${PORT}/api`,
-  );
-});
+if (process.env.NODE_ENV !== "test") {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(
+      `Serwer działa poprawnie, pod adresem: http://localhost:${PORT}`,
+    );
+  });
+}
 
 export default app;
